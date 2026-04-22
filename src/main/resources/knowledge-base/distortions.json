@@ -1,0 +1,234 @@
+{
+  "distortions": [
+    {
+      "id": "all-or-nothing",
+      "name": "All-or-Nothing Thinking",
+      "description": "Seeing things in black-and-white categories with no middle ground. If performance falls short of perfect, you see yourself as a total failure.",
+      "examples": [
+        "If I don't get an A, I'm a complete failure.",
+        "Either I do it right or not at all.",
+        "If I'm not the best, I'm the worst.",
+        "I didn't finish everything on my to-do list, so the whole day was wasted."
+      ],
+      "challengeQuestions": [
+        "Is there a middle ground between these two extremes?",
+        "Would I judge a friend this harshly in the same situation?",
+        "What percentage of the task did I actually complete?",
+        "Can something be good enough without being perfect?"
+      ],
+      "reframingStrategies": [
+        "Look for the gray area between the extremes",
+        "Rate experiences on a scale of 0-100 instead of pass/fail",
+        "Focus on progress rather than perfection",
+        "Acknowledge partial successes"
+      ]
+    },
+    {
+      "id": "catastrophizing",
+      "name": "Catastrophizing",
+      "description": "Expecting the worst possible outcome without considering other more likely possibilities. Magnifying the importance of negative events.",
+      "examples": [
+        "If I make a mistake at work, I'll definitely get fired.",
+        "This headache must be a brain tumor.",
+        "If I fail this test, my entire career is over.",
+        "One bad review means I'll never succeed."
+      ],
+      "challengeQuestions": [
+        "What is the most likely outcome, not just the worst?",
+        "How many times have I predicted catastrophe and been wrong?",
+        "On a scale of 1-10, how bad would this realistically be?",
+        "What would I tell a friend who was thinking this way?"
+      ],
+      "reframingStrategies": [
+        "Consider the best, worst, and most likely outcomes",
+        "Calculate the actual probability of the feared outcome",
+        "Recall past situations where feared outcomes didn't happen",
+        "Focus on what you can control in the situation"
+      ]
+    },
+    {
+      "id": "mind-reading",
+      "name": "Mind Reading",
+      "description": "Assuming you know what others are thinking without evidence. Believing that others are reacting negatively to you without checking.",
+      "examples": [
+        "They must think I'm incompetent.",
+        "She didn't smile at me because she hates me.",
+        "My boss thinks I'm not good enough.",
+        "Everyone at the meeting noticed my mistake and judged me."
+      ],
+      "challengeQuestions": [
+        "What evidence do I have that they are actually thinking this?",
+        "Could there be other explanations for their behavior?",
+        "Have I asked them what they actually think?",
+        "Am I projecting my own insecurities onto others?"
+      ],
+      "reframingStrategies": [
+        "Check your assumptions by asking directly",
+        "Consider alternative explanations for others' behavior",
+        "Remember that people are usually focused on themselves",
+        "Base conclusions on evidence, not assumptions"
+      ]
+    },
+    {
+      "id": "overgeneralization",
+      "name": "Overgeneralization",
+      "description": "Making broad conclusions based on a single event. Using words like 'always,' 'never,' 'everyone,' or 'nobody.'",
+      "examples": [
+        "I failed once, so I'll always fail.",
+        "Nobody ever listens to me.",
+        "I always mess things up.",
+        "Nothing good ever happens to me."
+      ],
+      "challengeQuestions": [
+        "Is this truly 'always' or 'never,' or are there exceptions?",
+        "Am I basing this on one event or actual patterns?",
+        "Can I think of times when the opposite was true?",
+        "What would the evidence look like if I viewed it objectively?"
+      ],
+      "reframingStrategies": [
+        "Replace 'always' and 'never' with 'sometimes' or 'recently'",
+        "Look for counterexamples to the generalization",
+        "Focus on the specific situation rather than making global conclusions",
+        "Keep a record of positive experiences to counter the bias"
+      ]
+    },
+    {
+      "id": "should-statements",
+      "name": "Should Statements",
+      "description": "Using rigid rules about how you or others should behave. These create unrealistic expectations and lead to guilt and frustration.",
+      "examples": [
+        "I should always be productive.",
+        "They should know how I feel without me telling them.",
+        "I should never make mistakes.",
+        "People should always be fair."
+      ],
+      "challengeQuestions": [
+        "Is this a realistic expectation?",
+        "Where did this 'rule' come from?",
+        "What happens when I replace 'should' with 'would like to'?",
+        "Am I holding myself to a standard I wouldn't apply to others?"
+      ],
+      "reframingStrategies": [
+        "Replace 'should' with 'I would prefer' or 'It would be nice if'",
+        "Examine whether the rule is realistic and flexible",
+        "Consider the cost of maintaining this rigid expectation",
+        "Practice self-compassion when expectations aren't met"
+      ]
+    },
+    {
+      "id": "mental-filtering",
+      "name": "Mental Filtering",
+      "description": "Focusing exclusively on negative details while ignoring all the positive aspects of a situation. Like a filter that only lets through the bad.",
+      "examples": [
+        "I got great feedback on nine things but one criticism, and that's all I can think about.",
+        "The whole vacation was ruined because of one rainy day.",
+        "I can only remember the one question I got wrong on the test.",
+        "Despite all my accomplishments, I focus on the one project that didn't go well."
+      ],
+      "challengeQuestions": [
+        "Am I focusing only on the negatives and ignoring the positives?",
+        "What went well in this situation that I might be overlooking?",
+        "If I listed all aspects of this experience, what would the ratio of positive to negative be?",
+        "Would someone else see this situation differently?"
+      ],
+      "reframingStrategies": [
+        "Deliberately list the positive aspects of the situation",
+        "Keep a gratitude journal to practice noticing the good",
+        "Ask yourself what you would notice if you were looking for positives",
+        "Consider the full picture rather than one detail"
+      ]
+    },
+    {
+      "id": "fortune-telling",
+      "name": "Fortune Telling",
+      "description": "Predicting negative outcomes without sufficient evidence. Acting as though a negative prediction is an established fact.",
+      "examples": [
+        "I just know the interview will go badly.",
+        "There's no point in trying because I'll fail anyway.",
+        "This relationship is doomed to end.",
+        "I won't enjoy the party, so I shouldn't go."
+      ],
+      "challengeQuestions": [
+        "Do I have a crystal ball, or am I guessing?",
+        "What evidence supports this prediction?",
+        "Have my negative predictions been accurate in the past?",
+        "What might happen if I tested this prediction instead of assuming it's true?"
+      ],
+      "reframingStrategies": [
+        "Treat predictions as hypotheses to test, not facts",
+        "Review past predictions and their actual outcomes",
+        "Consider positive or neutral outcomes that are equally likely",
+        "Take action despite the prediction and see what actually happens"
+      ]
+    },
+    {
+      "id": "emotional-reasoning",
+      "name": "Emotional Reasoning",
+      "description": "Assuming that negative feelings reflect reality. Because you feel it, you believe it must be true.",
+      "examples": [
+        "I feel anxious, so something bad must be about to happen.",
+        "I feel stupid, so I must be stupid.",
+        "I feel guilty, so I must have done something wrong.",
+        "I feel overwhelmed, so my problems must be impossible to solve."
+      ],
+      "challengeQuestions": [
+        "Just because I feel this way, does that make it true?",
+        "What are the facts of the situation separate from my feelings?",
+        "Have I felt this way before and been wrong about the situation?",
+        "Would I reach the same conclusion if I were in a different mood?"
+      ],
+      "reframingStrategies": [
+        "Separate feelings from facts",
+        "Remind yourself that emotions are temporary and not evidence",
+        "Look for objective evidence to evaluate the situation",
+        "Practice labeling emotions without acting on them as truth"
+      ]
+    },
+    {
+      "id": "labeling",
+      "name": "Labeling",
+      "description": "Attaching a fixed, global label to yourself or others based on limited evidence. Instead of describing the behavior, you assign a label to the whole person.",
+      "examples": [
+        "I made a mistake, so I'm a loser.",
+        "They were late, so they're irresponsible.",
+        "I couldn't solve the problem, so I'm an idiot.",
+        "She said no, so she's a terrible person."
+      ],
+      "challengeQuestions": [
+        "Am I defining myself or others by a single action?",
+        "Is this label fair and accurate based on all the evidence?",
+        "Would I apply this label to a friend in the same situation?",
+        "Does one behavior really define a whole person?"
+      ],
+      "reframingStrategies": [
+        "Describe the specific behavior instead of labeling the person",
+        "Recognize that people are complex and cannot be reduced to a single label",
+        "Use language like 'I made a mistake' instead of 'I am a failure'",
+        "Consider the full range of your qualities and behaviors"
+      ]
+    },
+    {
+      "id": "personalization",
+      "name": "Personalization",
+      "description": "Blaming yourself for events outside your control. Taking excessive responsibility for external events that are not entirely your fault.",
+      "examples": [
+        "My child got a bad grade, so I must be a bad parent.",
+        "The team project failed because of me.",
+        "They're in a bad mood because of something I did.",
+        "If only I had done something differently, this wouldn't have happened."
+      ],
+      "challengeQuestions": [
+        "Am I really the sole cause of this outcome?",
+        "What other factors contributed to this situation?",
+        "Would I blame someone else entirely if they were in my position?",
+        "Is it possible that this had nothing to do with me?"
+      ],
+      "reframingStrategies": [
+        "Consider all the factors that contributed to the outcome",
+        "Assign responsibility proportionally rather than taking all the blame",
+        "Recognize what is and isn't within your control",
+        "Practice self-compassion and acknowledge your limitations"
+      ]
+    }
+  ]
+}

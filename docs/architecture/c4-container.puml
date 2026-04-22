@@ -1,0 +1,32 @@
+@startuml c4-container
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Container Diagram - Digital Therapy Assistant
+
+Person(patient, "Patient", "Primary user seeking burnout recovery")
+Person(therapist, "Therapist", "Monitors patient progress")
+
+System_Boundary(dta, "Digital Therapy Assistant") {
+    Container(cli, "CLI Application", "Java 21", "Command-line interface for user interaction with menu-driven CBT workflows")
+    Container(api, "Spring Boot Application", "Java 21, Spring Boot 4.0", "Provides REST API, business logic, security, and AI integration")
+    ContainerDb(h2db, "H2 Database", "H2 (File-based)", "Stores users, sessions, diary entries, chat messages, and cognitive distortions")
+    Container(vectorstore, "SimpleVector Store", "Java, In-Memory", "Vector storage for RAG similarity search using cosine similarity")
+    Container(kb, "Knowledge Base", "JSON Files", "CBT reference materials: distortions, techniques, crisis protocols")
+}
+
+System_Ext(llm, "LLM Provider", "Anthropic Claude API")
+
+Rel(patient, cli, "Interacts via", "Terminal/Console")
+Rel(patient, api, "Makes API calls to", "HTTPS/JSON")
+Rel(therapist, api, "Monitors progress via", "HTTPS/JSON")
+
+Rel(cli, api, "Calls services via", "Spring DI")
+Rel(api, h2db, "Reads/writes data", "JPA/JDBC")
+Rel(api, vectorstore, "Stores and queries embeddings", "Java API")
+Rel(api, kb, "Loads CBT reference content", "File I/O")
+Rel(vectorstore, kb, "Indexes content from", "Embeddings")
+Rel(api, llm, "Sends prompts, receives responses", "HTTPS/REST")
+
+@enduml

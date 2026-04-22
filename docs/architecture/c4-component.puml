@@ -1,0 +1,72 @@
+@startuml c4-component
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Component Diagram - Digital Therapy Assistant (Spring Boot Application)
+
+ContainerDb(h2db, "H2 Database", "H2 File-based")
+Container(vectorstore, "SimpleVector Store", "In-Memory")
+System_Ext(llm, "LLM Provider", "Anthropic Claude")
+
+Container_Boundary(app, "Spring Boot Application") {
+
+    Component(authCtrl, "AuthController", "Spring REST Controller", "Handles registration, login, token refresh, logout")
+    Component(sessionCtrl, "SessionController", "Spring REST Controller", "Manages CBT session lifecycle and chat")
+    Component(diaryCtrl, "DiaryController", "Spring REST Controller", "CRUD for thought diary entries and insights")
+    Component(progressCtrl, "ProgressController", "Spring REST Controller", "Weekly, monthly, burnout progress tracking")
+    Component(crisisCtrl, "CrisisController", "Spring REST Controller", "Crisis hub, coping strategies, safety plan")
+
+    Component(authSvc, "AuthService", "Spring Service", "User authentication with JWT tokens and BCrypt passwords")
+    Component(sessionSvc, "SessionService", "Spring Service", "Session library, start/end sessions, chat orchestration")
+    Component(diarySvc, "DiaryService", "Spring Service", "Diary entry management and AI-powered distortion analysis")
+    Component(progressSvc, "ProgressService", "Spring Service", "Progress calculations and achievement tracking")
+    Component(crisisSvc, "CrisisService", "Spring Service", "Crisis detection, coping strategies, safety planning")
+    Component(aiSvc, "AiService", "Spring Service", "AI-powered therapeutic responses and analysis")
+
+    Component(userRepo, "UserRepository", "Spring Data JPA", "User entity persistence")
+    Component(sessionRepo, "SessionRepository", "Spring Data JPA", "UserSession and CbtSession persistence")
+    Component(diaryRepo, "DiaryEntryRepository", "Spring Data JPA", "Diary entry persistence with custom queries")
+    Component(chatRepo, "ChatMessageRepository", "Spring Data JPA", "Chat message persistence")
+
+    Component(ragBuilder, "RagContextBuilder", "Spring Component", "Assembles context from vector store, sessions, and diary")
+    Component(llmClient, "LlmClient", "Spring Component", "HTTP client for LLM API communication")
+    Component(crisisDetector, "CrisisDetector", "Spring Component", "Multi-layer crisis detection (keywords + AI)")
+
+    Component(jwtFilter, "JwtAuthenticationFilter", "Spring Security Filter", "Validates JWT tokens on each request")
+    Component(jwtProvider, "JwtTokenProvider", "Spring Component", "Generates and validates JWT tokens")
+}
+
+Rel(authCtrl, authSvc, "Uses")
+Rel(sessionCtrl, sessionSvc, "Uses")
+Rel(diaryCtrl, diarySvc, "Uses")
+Rel(progressCtrl, progressSvc, "Uses")
+Rel(crisisCtrl, crisisSvc, "Uses")
+
+Rel(authSvc, userRepo, "Uses")
+Rel(authSvc, jwtProvider, "Uses")
+Rel(sessionSvc, sessionRepo, "Uses")
+Rel(sessionSvc, aiSvc, "Uses")
+Rel(sessionSvc, chatRepo, "Uses")
+Rel(diarySvc, diaryRepo, "Uses")
+Rel(diarySvc, aiSvc, "Uses")
+Rel(progressSvc, sessionRepo, "Uses")
+Rel(progressSvc, diaryRepo, "Uses")
+Rel(crisisSvc, crisisDetector, "Uses")
+
+Rel(aiSvc, ragBuilder, "Builds context via")
+Rel(aiSvc, llmClient, "Sends prompts via")
+Rel(aiSvc, crisisDetector, "Detects crisis via")
+Rel(ragBuilder, vectorstore, "Queries similar documents")
+Rel(ragBuilder, sessionRepo, "Retrieves session history")
+Rel(ragBuilder, diaryRepo, "Retrieves diary patterns")
+
+Rel(llmClient, llm, "HTTPS/REST")
+Rel(userRepo, h2db, "JPA/JDBC")
+Rel(sessionRepo, h2db, "JPA/JDBC")
+Rel(diaryRepo, h2db, "JPA/JDBC")
+Rel(chatRepo, h2db, "JPA/JDBC")
+
+Rel(jwtFilter, jwtProvider, "Validates tokens via")
+
+@enduml

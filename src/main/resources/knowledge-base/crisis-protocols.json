@@ -1,0 +1,119 @@
+{
+  "warningSignsRecognition": {
+    "description": "Key indicators that someone may be in crisis",
+    "verbalSigns": [
+      "Talking about wanting to die or kill themselves",
+      "Expressing feelings of hopelessness or having no reason to live",
+      "Talking about feeling trapped or in unbearable pain",
+      "Talking about being a burden to others"
+    ],
+    "behavioralSigns": [
+      "Withdrawing from activities and social contact",
+      "Increased use of alcohol or drugs",
+      "Giving away prized possessions",
+      "Searching for methods of self-harm",
+      "Sleeping too much or too little",
+      "Aggressive or reckless behavior"
+    ],
+    "emotionalSigns": [
+      "Sudden calmness after a period of depression",
+      "Extreme mood swings",
+      "Loss of interest in most activities",
+      "Severe anxiety or agitation"
+    ]
+  },
+  "deEscalationTechniques": [
+    {
+      "name": "Active Listening",
+      "description": "Give full attention, reflect feelings, and validate their experience without judgment."
+    },
+    {
+      "name": "Grounding Techniques",
+      "description": "Use the 5-4-3-2-1 technique: identify 5 things you see, 4 you touch, 3 you hear, 2 you smell, 1 you taste."
+    },
+    {
+      "name": "Safety Assessment",
+      "description": "Directly but compassionately ask about suicidal thoughts, plans, and access to means."
+    },
+    {
+      "name": "Collaborative Safety Planning",
+      "description": "Work together to create a plan for staying safe in the immediate future."
+    }
+  ],
+  "safetyPlanningSteps": [
+    "Recognize personal warning signs",
+    "Identify internal coping strategies",
+    "List people and social settings that provide distraction",
+    "List people to call for help",
+    "List professional resources and emergency contacts",
+    "Make the environment safe"
+  ],
+  "emergencyResources": [
+    {
+      "name": "988 Suicide & Crisis Lifeline",
+      "phone": "988",
+      "description": "24/7 free confidential support for people in suicidal crisis or emotional distress",
+      "available24x7": true
+    },
+    {
+      "name": "Crisis Text Line",
+      "phone": "Text HOME to 741741",
+      "description": "Free 24/7 crisis support via text message",
+      "available24x7": true
+    },
+    {
+      "name": "SAMHSA National Helpline",
+      "phone": "1-800-662-4357",
+      "description": "Free referral and information service for mental health and substance abuse",
+      "available24x7": true
+    },
+    {
+      "name": "Emergency Services",
+      "phone": "911",
+      "description": "For immediate life-threatening emergencies",
+      "available24x7": true
+    }
+  ],
+  "copingStrategies": [
+    {
+      "id": "deep-breathing",
+      "name": "Deep Breathing Exercise",
+      "description": "Controlled breathing to activate the parasympathetic nervous system",
+      "category": "Relaxation",
+      "steps": ["Inhale slowly for 4 counts", "Hold for 4 counts", "Exhale slowly for 6 counts", "Repeat 5-10 times"],
+      "estimatedMinutes": 5
+    },
+    {
+      "id": "grounding-54321",
+      "name": "5-4-3-2-1 Grounding",
+      "description": "Sensory awareness technique to manage overwhelming emotions",
+      "category": "Grounding",
+      "steps": ["Name 5 things you can see", "Name 4 things you can touch", "Name 3 things you can hear", "Name 2 things you can smell", "Name 1 thing you can taste"],
+      "estimatedMinutes": 5
+    },
+    {
+      "id": "progressive-relaxation",
+      "name": "Progressive Muscle Relaxation",
+      "description": "Systematically tensing and releasing muscle groups",
+      "category": "Relaxation",
+      "steps": ["Start with your feet - tense for 5 seconds", "Release and notice the difference", "Move to calves, thighs, abdomen", "Continue through chest, arms, hands", "Finish with shoulders, neck, face"],
+      "estimatedMinutes": 15
+    },
+    {
+      "id": "thought-defusion",
+      "name": "Thought Defusion",
+      "description": "Creating distance from distressing thoughts",
+      "category": "Cognitive",
+      "steps": ["Notice the thought", "Say 'I notice I am having the thought that...'", "Visualize the thought as words on a screen", "Watch the thought float away like a cloud"],
+      "estimatedMinutes": 10
+    },
+    {
+      "id": "safe-place-visualization",
+      "name": "Safe Place Visualization",
+      "description": "Creating a mental image of a calm, safe environment",
+      "category": "Visualization",
+      "steps": ["Close your eyes and take deep breaths", "Imagine a place where you feel completely safe", "Engage all senses in the visualization", "Stay in this place for several minutes", "Slowly return your attention to the present"],
+      "estimatedMinutes": 10
+    }
+  ]
+}

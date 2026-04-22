@@ -1,0 +1,65 @@
+{
+  "techniques": [
+    {
+      "id": "thought-challenging",
+      "name": "Thought Challenging / Cognitive Restructuring",
+      "description": "A systematic process of identifying, evaluating, and modifying negative automatic thoughts.",
+      "steps": [
+        "Identify the automatic thought",
+        "Examine the evidence for and against the thought",
+        "Consider alternative explanations",
+        "Rate belief in the original thought after restructuring"
+      ],
+      "applicableTo": ["all-or-nothing", "catastrophizing", "overgeneralization", "mind-reading"]
+    },
+    {
+      "id": "behavioral-activation",
+      "name": "Behavioral Activation",
+      "description": "Scheduling and engaging in positive activities to counteract withdrawal and avoidance.",
+      "steps": [
+        "Monitor current activities and mood",
+        "Identify values and meaningful activities",
+        "Schedule pleasurable and mastery activities",
+        "Track mood changes with activity engagement"
+      ],
+      "applicableTo": ["emotional-reasoning", "fortune-telling"]
+    },
+    {
+      "id": "exposure",
+      "name": "Exposure Techniques",
+      "description": "Gradually facing feared situations to reduce anxiety and avoidance behaviors.",
+      "steps": [
+        "Create a fear hierarchy",
+        "Start with least anxiety-provoking situation",
+        "Practice relaxation during exposure",
+        "Gradually move up the hierarchy"
+      ],
+      "applicableTo": ["catastrophizing", "fortune-telling"]
+    },
+    {
+      "id": "relaxation-mindfulness",
+      "name": "Relaxation and Mindfulness",
+      "description": "Techniques to reduce physical tension and increase present-moment awareness.",
+      "steps": [
+        "Practice deep breathing exercises",
+        "Progressive muscle relaxation",
+        "Mindful observation of thoughts without judgment",
+        "Body scan meditation"
+      ],
+      "applicableTo": ["emotional-reasoning", "catastrophizing"]
+    },
+    {
+      "id": "problem-solving",
+      "name": "Problem-Solving Therapy",
+      "description": "A structured approach to identifying and implementing solutions to life problems.",
+      "steps": [
+        "Define the problem clearly",
+        "Brainstorm possible solutions",
+        "Evaluate pros and cons of each solution",
+        "Choose and implement the best solution",
+        "Review the outcome"
+      ],
+      "applicableTo": ["all-or-nothing", "should-statements", "personalization"]
+    }
+  ]
+}
