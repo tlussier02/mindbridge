@@ -1,5 +1,5 @@
 @startuml entity-relationship
-title Digital Therapy Assistant - Entity Relationship Diagram
+title MindBridge - Entity Relationship Diagram
 
 skinparam linetype ortho
 

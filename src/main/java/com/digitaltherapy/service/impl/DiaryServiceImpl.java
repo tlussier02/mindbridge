@@ -79,6 +79,7 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<DiaryEntrySummary> getEntries(UUID userId, Pageable pageable) {
         log.info("Fetching diary entries for user: {}", userId);
 
@@ -89,6 +90,7 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public DiaryEntryDetail getEntryDetail(UUID entryId) {
         log.info("Fetching diary entry detail for entry: {}", entryId);
 

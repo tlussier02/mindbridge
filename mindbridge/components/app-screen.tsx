@@ -52,14 +52,8 @@ import {
 } from "@/components/flows/progress-dashboard"
 
 /* ── Web Flow Imports ── */
-import {
-  WebWelcomeScreen,
-  WebUserTypeScreen,
-  WebPrivacyScreen,
-  WebAssessmentScreen,
-  WebPersonalizationScreen,
-  WebOnboardingCompleteScreen,
-} from "@/components/web/web-onboarding"
+import { WebWelcomeScreen, WebUserTypeScreen, WebPrivacyScreen, WebAssessmentScreen, WebPersonalizationScreen, WebOnboardingCompleteScreen } from "@/components/web/web-onboarding"
+import { WebAuthScreen, RealDashboard, RealSessionLibrary, RealSessionChat, RealDiaryHome, RealDiaryNew, RealDiaryDetail, RealProgress, RealCrisis } from "@/components/web/real-screens"
 import { WebDashboardScreen } from "@/components/web/web-dashboard"
 import {
   WebSessionLibraryScreen,
@@ -133,16 +127,16 @@ const mobileScreenMap: Record<string, React.ComponentType> = {
 }
 
 const webScreenMap: Record<string, React.ComponentType> = {
-  welcome: WebWelcomeScreen,
+  welcome: WebAuthScreen,
   "user-type": WebUserTypeScreen,
   privacy: WebPrivacyScreen,
   assessment: WebAssessmentScreen,
   personalization: WebPersonalizationScreen,
   "onboarding-complete": WebOnboardingCompleteScreen,
-  dashboard: WebDashboardScreen,
-  "session-library": WebSessionLibraryScreen,
+  dashboard: RealDashboard,
+  "session-library": RealSessionLibrary,
   "session-intro": WebSessionIntroScreen,
-  "session-chat": WebSessionChatScreen,
+  "session-chat": RealSessionChat,
   "session-multimodal": WebSessionMultimodalScreen,
   "session-scenario": WebSessionScenarioScreen,
   "session-thought-challenge": WebSessionThoughtChallengeScreen,
@@ -151,22 +145,22 @@ const webScreenMap: Record<string, React.ComponentType> = {
   "session-rating": WebSessionRatingScreen,
   "session-history": WebSessionHistoryScreen,
   "session-detail": WebSessionDetailScreen,
-  "diary-home": WebDiaryHomeScreen,
-  "diary-detail": WebDiaryDetailScreen,
-  "diary-new": WebDiaryNewScreen,
+  "diary-home": RealDiaryHome,
+  "diary-detail": RealDiaryDetail,
+  "diary-new": RealDiaryNew,
   "diary-situation": WebDiarySituationScreen,
   "diary-thoughts": WebDiaryThoughtsScreen,
   "diary-distortions": WebDiaryDistortionsScreen,
   "diary-reframe": WebDiaryReframeScreen,
   "diary-saved": WebDiarySavedScreen,
   "diary-insights": WebDiaryInsightsScreen,
-  "crisis-detection": WebCrisisDetectionScreen,
-  "crisis-coping": WebCrisisCopingScreen,
-  "crisis-resources": WebCrisisResourcesScreen,
-  "crisis-safety-plan": WebCrisisSafetyPlanScreen,
-  "progress-weekly": WebProgressWeeklyScreen,
-  "progress-trends": WebProgressTrendsScreen,
-  "progress-achievements": WebProgressAchievementsScreen,
+  "crisis-detection": RealCrisis,
+  "crisis-coping": RealCrisis,
+  "crisis-resources": RealCrisis,
+  "crisis-safety-plan": RealCrisis,
+  "progress-weekly": RealProgress,
+  "progress-trends": RealProgress,
+  "progress-achievements": RealProgress,
 }
 
 export function AppScreen() {
