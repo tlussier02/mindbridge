@@ -30,6 +30,31 @@ app.cli.enabled=true
 - docs: `docs/`
 - deployment docs: `docs/deployment/`
 
+## Local Environment Setup
+
+Create a local `.env` file in the project root and paste in the required secrets.
+
+Tracked template:
+
+- `.env.example`
+
+Local secret file:
+
+- `.env`
+
+Required values:
+
+```env
+ANTHROPIC_API_KEY=your_real_anthropic_key
+JWT_SECRET=your_secure_random_secret
+```
+
+Notes:
+
+- `.env` is gitignored and should not be committed
+- `docker-compose.yml` reads these values for container startup
+- GitHub Actions uses the repository secret named `ANTHROPIC_API_KEY`
+
 ## Expected Assignment 3 Deliverables
 
 - working frontend on port `3000`

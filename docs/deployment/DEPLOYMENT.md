@@ -38,6 +38,12 @@ The final deployed system should provide:
 
 Create a `.env` file in the project root with the values required by the backend and deployment stack.
 
+Use the tracked template:
+
+```bash
+cp .env.example .env
+```
+
 Minimum expected values:
 
 ```env
