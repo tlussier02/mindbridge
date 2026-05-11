@@ -55,6 +55,10 @@ Notes:
 - `docker-compose.yml` reads these values for container startup
 - GitHub Actions uses the repository secret named `ANTHROPIC_API_KEY`
 
+For full teammate build/run steps, see:
+
+- `docs/TEAM_SETUP.md`
+
 ## Expected Assignment 3 Deliverables
 
 - working frontend on port `3000`
