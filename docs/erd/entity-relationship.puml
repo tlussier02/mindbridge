@@ -1,5 +1,9 @@
 @startuml entity-relationship
+<<<<<<< HEAD
 title Digital Therapy Assistant - Entity Relationship Diagram
+=======
+title MindBridge - Entity Relationship Diagram
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 
 skinparam linetype ortho
 

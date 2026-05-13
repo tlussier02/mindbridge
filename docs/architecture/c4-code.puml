@@ -94,7 +94,11 @@ KnowledgeBaseLoader --> EmbeddingService : generates embeddings
 title Sequence Diagram - Chat Message Flow
 
 actor User
+<<<<<<< HEAD
 participant "CLI Client" as CLI
+=======
+participant "Web Frontend" as FE
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 participant "SessionController" as SC
 participant "SessionService" as SS
 participant "AiService" as AI
@@ -105,8 +109,13 @@ participant "CrisisDetector" as CD
 participant "ChatMessageRepository" as CMR
 database "H2 Database" as DB
 
+<<<<<<< HEAD
 User -> CLI: Enter message
 CLI -> SC: POST /sessions/{id}/chat
+=======
+User -> FE: Enter message
+FE -> SC: POST /sessions/{id}/chat
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 SC -> SS: chat(sessionId, message)
 
 SS -> CMR: save(userMessage)
@@ -135,8 +144,13 @@ SS -> CMR: save(assistantMessage)
 CMR -> DB: INSERT chat_message
 
 SS --> SC: ChatResponse
+<<<<<<< HEAD
 SC --> CLI: JSON response
 CLI --> User: Display response
+=======
+SC --> FE: JSON response
+FE --> User: Display response
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 
 @enduml
 
@@ -145,7 +159,11 @@ CLI --> User: Display response
 title Sequence Diagram - Diary Entry with AI Analysis
 
 actor User
+<<<<<<< HEAD
 participant "CLI Client" as CLI
+=======
+participant "Web Frontend" as FE
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 participant "DiaryController" as DC
 participant "DiaryService" as DS
 participant "AiService" as AI
@@ -154,10 +172,17 @@ participant "CognitiveDistortionRepo" as CDR
 participant "DiaryEntryRepository" as DER
 database "H2 Database" as DB
 
+<<<<<<< HEAD
 User -> CLI: Create new diary entry
 CLI -> CLI: Prompt for situation,\nthought, emotions, mood
 
 CLI -> DC: POST /diary/distortions/suggest
+=======
+User -> FE: Create new diary entry
+FE -> FE: Collect situation,\nthought, emotions, mood
+
+FE -> DC: POST /diary/distortions/suggest
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 DC -> DS: suggestDistortions(thought)
 DS -> AI: analyzeThought(thought)
 
@@ -170,12 +195,21 @@ LLM --> AI: JSON distortion analysis
 
 AI --> DS: List<DistortionSuggestion>
 DS --> DC: List<DistortionSuggestion>
+<<<<<<< HEAD
 DC --> CLI: JSON suggestions
 CLI --> User: Display suggested distortions
 
 User -> CLI: Confirm distortions,\nadd alternative thought
 
 CLI -> DC: POST /diary/entries
+=======
+DC --> FE: JSON suggestions
+FE --> User: Display suggested distortions
+
+User -> FE: Confirm distortions,\nadd alternative thought
+
+FE -> DC: POST /diary/entries
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 DC -> DS: createEntry(userId, request)
 
 DS -> CDR: findAllById(distortionIds)
@@ -187,7 +221,12 @@ DER -> DB: INSERT diary_entry
 DER --> DS: saved entry
 
 DS --> DC: DiaryEntryResponse
+<<<<<<< HEAD
 DC --> CLI: JSON response
 CLI --> User: Entry saved confirmation
+=======
+DC --> FE: JSON response
+FE --> User: Entry saved confirmation
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 
 @enduml

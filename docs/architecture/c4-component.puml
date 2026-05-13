@@ -3,7 +3,11 @@
 
 LAYOUT_WITH_LEGEND()
 
+<<<<<<< HEAD
 title Component Diagram - Digital Therapy Assistant (Spring Boot Application)
+=======
+title Component Diagram - MindBridge (Spring Boot Application)
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 
 ContainerDb(h2db, "H2 Database", "H2 File-based")
 Container(vectorstore, "SimpleVector Store", "In-Memory")

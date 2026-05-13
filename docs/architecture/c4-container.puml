@@ -3,14 +3,24 @@
 
 LAYOUT_WITH_LEGEND()
 
+<<<<<<< HEAD
 title Container Diagram - Digital Therapy Assistant
+=======
+title Container Diagram - MindBridge
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 
 Person(patient, "Patient", "Primary user seeking burnout recovery")
 Person(therapist, "Therapist", "Monitors patient progress")
 
+<<<<<<< HEAD
 System_Boundary(dta, "Digital Therapy Assistant") {
     Container(cli, "CLI Application", "Java 21", "Command-line interface for user interaction with menu-driven CBT workflows")
     Container(api, "Spring Boot Application", "Java 21, Spring Boot 4.0", "Provides REST API, business logic, security, and AI integration")
+=======
+System_Boundary(dta, "MindBridge") {
+    Container(frontend, "Web Frontend", "Next.js / React", "Browser-based interface for authentication, sessions, diary, progress, and crisis support")
+    Container(api, "Spring Boot Application", "Java 21, Spring Boot 4.0", "Provides REST API, business logic, security, AI integration, and MCP endpoints")
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
     ContainerDb(h2db, "H2 Database", "H2 (File-based)", "Stores users, sessions, diary entries, chat messages, and cognitive distortions")
     Container(vectorstore, "SimpleVector Store", "Java, In-Memory", "Vector storage for RAG similarity search using cosine similarity")
     Container(kb, "Knowledge Base", "JSON Files", "CBT reference materials: distortions, techniques, crisis protocols")
@@ -18,11 +28,18 @@ System_Boundary(dta, "Digital Therapy Assistant") {
 
 System_Ext(llm, "LLM Provider", "Anthropic Claude API")
 
+<<<<<<< HEAD
 Rel(patient, cli, "Interacts via", "Terminal/Console")
 Rel(patient, api, "Makes API calls to", "HTTPS/JSON")
 Rel(therapist, api, "Monitors progress via", "HTTPS/JSON")
 
 Rel(cli, api, "Calls services via", "Spring DI")
+=======
+Rel(patient, frontend, "Uses via", "Browser")
+Rel(frontend, api, "Calls REST endpoints", "HTTPS/JSON")
+Rel(therapist, api, "Monitors progress via", "HTTPS/JSON")
+
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 Rel(api, h2db, "Reads/writes data", "JPA/JDBC")
 Rel(api, vectorstore, "Stores and queries embeddings", "Java API")
 Rel(api, kb, "Loads CBT reference content", "File I/O")

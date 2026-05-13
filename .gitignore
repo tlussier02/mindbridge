@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
+=======
+
+# Local secrets / environment files
+.env
+.env.*
+!.env.example
+>>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
