@@ -1,0 +1,122 @@
+@startuml entity-relationship
+title MindBridge - Entity Relationship Diagram
+
+skinparam linetype ortho
+
+entity "users" as users {
+    * id : UUID <<PK>>
+    --
+    * email : VARCHAR(255) <<UNIQUE>>
+    * password_hash : VARCHAR(255)
+    name : VARCHAR(255)
+    onboarding_complete : BOOLEAN
+    onboarding_path : VARCHAR(50)
+    severity_level : VARCHAR(50)
+    streak_days : INTEGER
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
+
+entity "session_modules" as modules {
+    * id : UUID <<PK>>
+    --
+    * name : VARCHAR(255)
+    description : TEXT
+    category : VARCHAR(255)
+    order_index : INTEGER
+}
+
+entity "cbt_sessions" as cbt {
+    * id : UUID <<PK>>
+    --
+    * module_id : UUID <<FK>>
+    title : VARCHAR(255)
+    description : TEXT
+    duration_minutes : INTEGER
+    order_index : INTEGER
+}
+
+entity "user_sessions" as usessions {
+    * id : UUID <<PK>>
+    --
+    * user_id : UUID <<FK>>
+    * cbt_session_id : UUID <<FK>>
+    status : VARCHAR(50)
+    started_at : TIMESTAMP
+    ended_at : TIMESTAMP
+    mood_before : INTEGER
+    mood_after : INTEGER
+}
+
+entity "chat_messages" as chat {
+    * id : UUID <<PK>>
+    --
+    * user_session_id : UUID <<FK>>
+    role : VARCHAR(50)
+    content : TEXT
+    modality : VARCHAR(50)
+    timestamp : TIMESTAMP
+}
+
+entity "diary_entries" as diary {
+    * id : UUID <<PK>>
+    --
+    * user_id : UUID <<FK>>
+    situation : TEXT
+    automatic_thought : TEXT
+    alternative_thought : TEXT
+    mood_before : INTEGER
+    mood_after : INTEGER
+    belief_rating_before : INTEGER
+    belief_rating_after : INTEGER
+    created_at : TIMESTAMP
+    deleted : BOOLEAN
+}
+
+entity "diary_entry_emotions" as emotions {
+    * diary_entry_id : UUID <<FK>>
+    --
+    emotion : VARCHAR(255)
+    intensity : INTEGER
+}
+
+entity "cognitive_distortions" as distortions {
+    * id : VARCHAR(255) <<PK>>
+    --
+    name : VARCHAR(255)
+    description : TEXT
+}
+
+entity "distortion_examples" as examples {
+    * cognitive_distortion_id : VARCHAR(255) <<FK>>
+    --
+    examples : VARCHAR(500)
+}
+
+entity "diary_entry_distortions" as ded {
+    * diary_entry_id : UUID <<FK>>
+    * distortion_id : VARCHAR(255) <<FK>>
+}
+
+entity "trusted_contacts" as contacts {
+    * id : UUID <<PK>>
+    --
+    * user_id : UUID <<FK>>
+    name : VARCHAR(255)
+    phone : VARCHAR(50)
+    relationship : VARCHAR(255)
+}
+
+users ||--o{ usessions : "owns"
+users ||--o{ diary : "writes"
+users ||--o{ contacts : "has"
+modules ||--o{ cbt : "contains"
+cbt ||--o{ usessions : "tracked by"
+usessions ||--o{ chat : "contains"
+diary ||--o{ emotions : "has"
+diary }o--o{ distortions : "diary_entry_distortions"
+distortions ||--o{ examples : "has"
+diary .. ded
+distortions .. ded
+
+@enduml

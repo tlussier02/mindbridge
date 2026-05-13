@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+Dockerfile
+npm-debug.log
+pnpm-debug.log
+.DS_Store
+.env.local
+.env
