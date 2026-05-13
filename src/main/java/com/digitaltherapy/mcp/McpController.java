@@ -20,4 +20,6 @@ public class McpController {
             new McpTool("crisis_lookup", "Retrieves emergency safety protocols")
         );
     }
+
+    public record McpTool(String name, String description) {}
 }
