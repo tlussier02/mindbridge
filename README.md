@@ -58,6 +58,7 @@ Notes:
 For full teammate build/run steps, see:
 
 - `docs/TEAM_SETUP.md`
+- `docs/TIMMY_TESTING_CHECKLIST.md`
 
 ## Expected Assignment 3 Deliverables
 
