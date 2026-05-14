@@ -1,13 +1,13 @@
 # Timmy Deployment And Testing Checklist
 
-Use this checklist from the `rescue-cloud-ready` branch.
+Use this checklist from `master`.
 
 ## 1. Pull the branch
 
 ```bash
 git fetch origin
-git checkout rescue-cloud-ready
-git pull origin rescue-cloud-ready
+git checkout master
+git pull origin master
 ```
 
 ## 2. Confirm required secrets
@@ -89,10 +89,10 @@ On the server:
 ```bash
 cd /home/ec2-user/mindbridge
 git fetch origin
-git checkout rescue-cloud-ready
-git pull origin rescue-cloud-ready
-docker compose up -d --build --remove-orphans
-docker compose ps
+git checkout master
+git pull origin master
+sudo docker compose up -d --build --remove-orphans
+sudo docker compose ps
 ```
 
 ## 8. EC2 on-box checks
@@ -142,15 +142,15 @@ These checks have already been confirmed during recovery work:
 ## 11. Most likely remaining failure modes
 
 - EC2 `.env` is missing or stale
-- security group is not exposing `8080`
+- security group is not exposing `3000`
 - Docker daemon is running but old containers were not rebuilt
-- teammate is on `master` instead of `rescue-cloud-ready`
+- teammate is on an older local branch instead of current `master`
 
 ## 12. Done criteria
 
 Timmy's side is done when:
 
-- branch is deployed from `rescue-cloud-ready`
+- branch is deployed from `master`
 - local Docker stack builds and starts
 - EC2 on-box backend checks pass
 - public frontend on `:3000` works

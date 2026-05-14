@@ -19,13 +19,9 @@ For local development, run them separately first. That gives clearer errors than
 From your local clone:
 
 ```bash
-git pull origin <active-branch>
-```
-
-If you are working from the current recovery branch, use:
-
-```bash
-git pull origin rescue-cloud-ready
+git fetch origin
+git checkout master
+git pull origin master
 ```
 
 ## 2. Configure Java 21
@@ -156,3 +152,21 @@ That is a network/build-environment issue, not necessarily an app logic failure.
 - any dependency changes are intentional
 - `.env` is not staged
 - local H2 database files are not committed by accident
+
+## 11. If the pages do not load
+
+Start from the repo root:
+
+```bash
+docker compose up -d --build --remove-orphans
+docker compose ps
+curl -sS http://localhost:8080/actuator/health
+curl -I http://localhost:3000
+```
+
+Expected result:
+
+- backend health returns `UP`
+- frontend on `3000` returns `200`
+
+If `3000` returns `502`, wait 20-30 seconds and retry. The backend can take time to finish Spring Boot startup and AI model initialization on a fresh run.
