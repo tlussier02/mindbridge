@@ -3,31 +3,22 @@
 
 LAYOUT_WITH_LEGEND()
 
-<<<<<<< HEAD
 title System Context Diagram - Digital Therapy Assistant
-=======
 title System Context Diagram - MindBridge
->>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 
 Person(patient, "Patient", "Primary user seeking burnout recovery through CBT-based therapy")
 Person(therapist, "Therapist", "Mental health professional monitoring patient progress")
 Person(admin, "System Administrator", "Manages and maintains the platform")
 
-<<<<<<< HEAD
 System(dta, "Digital Therapy Assistant", "AI-guided Cognitive Behavioral Therapy platform for workplace burnout recovery")
-=======
 System(dta, "MindBridge", "AI-guided Cognitive Behavioral Therapy platform for workplace burnout recovery")
->>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 
 System_Ext(llm, "LLM Provider", "AI language model service (Anthropic Claude / OpenAI / Gemini)")
 System_Ext(email, "Email Service", "Sends notifications and alerts to users")
 System_Ext(ehr, "Healthcare EHR Systems", "Electronic Health Record systems for FHIR data export")
 
-<<<<<<< HEAD
 Rel(patient, dta, "Uses for CBT sessions, thought diary, progress tracking", "CLI / REST API")
-=======
 Rel(patient, dta, "Uses for CBT sessions, thought diary, progress tracking", "Browser / HTTPS")
->>>>>>> 2bb2ef62b9902fd4c36412ff39432e6f45bb2bf3
 Rel(therapist, dta, "Monitors patient progress and reviews session data", "REST API")
 Rel(admin, dta, "Manages platform configuration and user accounts", "REST API")
 
