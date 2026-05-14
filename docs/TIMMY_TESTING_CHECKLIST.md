@@ -118,15 +118,16 @@ From your own machine, replace `<host>` with the EC2 public DNS:
 
 ```bash
 curl -sS -I http://<host>:3000
-curl -sS --max-time 10 http://<host>:8080/actuator/health
-curl -sS --max-time 10 -I http://<host>:8080/swagger-ui
-curl -sS --max-time 10 -I http://<host>:8080/h2-console
+curl -sS --max-time 10 http://<host>:3000/actuator/health
+curl -sS --max-time 10 -I http://<host>:3000/swagger-ui
+curl -sS --max-time 10 -I http://<host>:3000/h2-console/
 ```
 
 Interpretation:
 
 - `:3000` should return `200`
-- if `:8080` times out from outside but works on-box, the app is running and the remaining issue is AWS security group or port exposure
+- backend tools are now expected through nginx on `:3000`
+- direct public `:8080` exposure is no longer required for final verification
 
 ## 10. What is already proven on this branch
 
