@@ -91,10 +91,10 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     @Transactional(readOnly = true)
-    public DiaryEntryDetail getEntryDetail(UUID entryId) {
-        log.info("Fetching diary entry detail for entry: {}", entryId);
+    public DiaryEntryDetail getEntryDetail(UUID userId, UUID entryId) {
+        log.info("Fetching diary entry detail for user: {}, entry: {}", userId, entryId);
 
-        DiaryEntry entry = diaryEntryRepository.findById(entryId)
+        DiaryEntry entry = diaryEntryRepository.findByIdAndUserIdAndDeletedFalse(entryId, userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Diary entry not found with id: " + entryId));
 
         return mapToDetail(entry);
@@ -102,10 +102,10 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     @Transactional
-    public void deleteEntry(UUID entryId) {
-        log.info("Soft deleting diary entry: {}", entryId);
+    public void deleteEntry(UUID userId, UUID entryId) {
+        log.info("Soft deleting diary entry for user: {}, entry: {}", userId, entryId);
 
-        DiaryEntry entry = diaryEntryRepository.findById(entryId)
+        DiaryEntry entry = diaryEntryRepository.findByIdAndUserIdAndDeletedFalse(entryId, userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Diary entry not found with id: " + entryId));
 
         entry.setDeleted(true);

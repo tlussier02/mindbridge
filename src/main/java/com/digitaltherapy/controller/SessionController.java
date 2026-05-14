@@ -54,20 +54,22 @@ public class SessionController {
     @PostMapping("/{sessionId}/chat")
     @Operation(summary = "Send a chat message within a session")
     public ResponseEntity<ChatResponse> chat(
+            @AuthenticationPrincipal User user,
             @PathVariable UUID sessionId,
             @Valid @RequestBody ChatRequest request) {
-        log.info("Chat message in session: {}", sessionId);
-        return ResponseEntity.ok(sessionService.chat(sessionId, request.getMessage()));
+        log.info("Chat message in session: {} for user: {}", sessionId, user.getId());
+        return ResponseEntity.ok(sessionService.chat(user.getId(), sessionId, request.getMessage()));
     }
 
     @PostMapping("/{sessionId}/end")
     @Operation(summary = "End a therapy session")
     public ResponseEntity<SessionSummary> endSession(
+            @AuthenticationPrincipal User user,
             @PathVariable UUID sessionId,
             @RequestBody(required = false) Map<String, Object> body) {
-        log.info("Ending session: {}", sessionId);
+        log.info("Ending session: {} for user: {}", sessionId, user.getId());
         String reason = body != null ? (String) body.get("reason") : null;
-        return ResponseEntity.ok(sessionService.endSession(sessionId, reason));
+        return ResponseEntity.ok(sessionService.endSession(user.getId(), sessionId, reason));
     }
 
     @GetMapping("/history")

@@ -1,0 +1,8 @@
+.git
+.github
+target
+data
+mindbridge/node_modules
+mindbridge/.next
+*.log
+.DS_Store

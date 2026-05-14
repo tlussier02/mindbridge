@@ -39,7 +39,9 @@ public class SecurityConfig {
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers("/actuator/health").permitAll()
                         .requestMatchers("/actuator/health/**").permitAll()
-                        .requestMatchers("/crisis/**").permitAll()
+                        .requestMatchers("/crisis").permitAll()
+                        .requestMatchers("/crisis/detect").permitAll()
+                        .requestMatchers("/crisis/coping-strategies").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

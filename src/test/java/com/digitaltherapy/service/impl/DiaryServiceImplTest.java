@@ -200,10 +200,11 @@ class DiaryServiceImplTest {
     @DisplayName("getEntryDetail - found - returns full detail")
     void getEntryDetail_Found_ReturnsDetail() {
         // Arrange
-        when(diaryEntryRepository.findById(TEST_ENTRY_ID)).thenReturn(Optional.of(testEntry));
+        when(diaryEntryRepository.findByIdAndUserIdAndDeletedFalse(TEST_ENTRY_ID, TEST_USER_ID))
+                .thenReturn(Optional.of(testEntry));
 
         // Act
-        DiaryEntryDetail result = diaryService.getEntryDetail(TEST_ENTRY_ID);
+        DiaryEntryDetail result = diaryService.getEntryDetail(TEST_USER_ID, TEST_ENTRY_ID);
 
         // Assert
         assertThat(result).isNotNull();
@@ -222,7 +223,7 @@ class DiaryServiceImplTest {
         assertThat(result.getBeliefRatingBefore()).isEqualTo(80);
         assertThat(result.getBeliefRatingAfter()).isEqualTo(40);
 
-        verify(diaryEntryRepository).findById(TEST_ENTRY_ID);
+        verify(diaryEntryRepository).findByIdAndUserIdAndDeletedFalse(TEST_ENTRY_ID, TEST_USER_ID);
     }
 
     @Test
@@ -230,30 +231,31 @@ class DiaryServiceImplTest {
     void getEntryDetail_NotFound_ThrowsException() {
         // Arrange
         UUID missingId = UUID.randomUUID();
-        when(diaryEntryRepository.findById(missingId)).thenReturn(Optional.empty());
+        when(diaryEntryRepository.findByIdAndUserIdAndDeletedFalse(missingId, TEST_USER_ID)).thenReturn(Optional.empty());
 
         // Act & Assert
-        assertThatThrownBy(() -> diaryService.getEntryDetail(missingId))
+        assertThatThrownBy(() -> diaryService.getEntryDetail(TEST_USER_ID, missingId))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("Diary entry not found");
 
-        verify(diaryEntryRepository).findById(missingId);
+        verify(diaryEntryRepository).findByIdAndUserIdAndDeletedFalse(missingId, TEST_USER_ID);
     }
 
     @Test
     @DisplayName("deleteEntry - soft deletes the entry")
     void deleteEntry_SoftDeletes() {
         // Arrange
-        when(diaryEntryRepository.findById(TEST_ENTRY_ID)).thenReturn(Optional.of(testEntry));
+        when(diaryEntryRepository.findByIdAndUserIdAndDeletedFalse(TEST_ENTRY_ID, TEST_USER_ID))
+                .thenReturn(Optional.of(testEntry));
         when(diaryEntryRepository.save(any(DiaryEntry.class))).thenReturn(testEntry);
 
         // Act
-        diaryService.deleteEntry(TEST_ENTRY_ID);
+        diaryService.deleteEntry(TEST_USER_ID, TEST_ENTRY_ID);
 
         // Assert
         assertThat(testEntry.getDeleted()).isTrue();
 
-        verify(diaryEntryRepository).findById(TEST_ENTRY_ID);
+        verify(diaryEntryRepository).findByIdAndUserIdAndDeletedFalse(TEST_ENTRY_ID, TEST_USER_ID);
         verify(diaryEntryRepository).save(testEntry);
     }
 

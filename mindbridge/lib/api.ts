@@ -97,10 +97,10 @@ export const api = {
     achievements: () => request<any[]>("/progress/achievements"),
   },
   crisis: {
-    hub: (userId?: string) => request<any>(`/crisis${userId ? `?userId=${userId}` : ""}`),
+    hub: () => request<any>("/crisis"),
     coping: () => request<any[]>("/crisis/coping-strategies"),
     detect: (text: string) => request<any>("/crisis/detect", { method: "POST", body: JSON.stringify({ text }) }),
-    safetyPlan: (userId: string) => request<any>(`/crisis/safety-plan?userId=${userId}`),
-    updateSafetyPlan: (userId: string, input: any) => request<any>(`/crisis/safety-plan?userId=${userId}`, { method: "PUT", body: JSON.stringify(input) }),
+    safetyPlan: () => request<any>("/crisis/safety-plan"),
+    updateSafetyPlan: (input: any) => request<any>("/crisis/safety-plan", { method: "PUT", body: JSON.stringify(input) }),
   },
 }

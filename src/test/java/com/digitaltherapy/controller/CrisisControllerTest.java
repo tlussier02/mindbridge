@@ -2,15 +2,19 @@ package com.digitaltherapy.controller;
 
 import com.digitaltherapy.config.JwtTokenProvider;
 import com.digitaltherapy.dto.*;
+import com.digitaltherapy.entity.User;
 import com.digitaltherapy.repository.UserRepository;
 import com.digitaltherapy.service.CrisisService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -48,6 +52,15 @@ class CrisisControllerTest {
     @BeforeEach
     void setUp() {
         objectMapper = new ObjectMapper();
+
+        User mockUser = User.builder().id(TEST_USER_ID).name("Test User").email("test@example.com").build();
+        var auth = new UsernamePasswordAuthenticationToken(mockUser, null, List.of());
+        SecurityContextHolder.getContext().setAuthentication(auth);
+    }
+
+    @AfterEach
+    void tearDown() {
+        SecurityContextHolder.clearContext();
     }
 
     // ----------------------------------------------------------- getCrisisHub
@@ -78,8 +91,7 @@ class CrisisControllerTest {
 
         when(crisisService.getCrisisHub(any())).thenReturn(hub);
 
-        mockMvc.perform(get("/crisis")
-                        .param("userId", TEST_USER_ID.toString()))
+        mockMvc.perform(get("/crisis"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("You are not alone. Help is available."))
                 .andExpect(jsonPath("$.emergencyResources[0].name").value("988 Suicide & Crisis Lifeline"))
@@ -193,8 +205,7 @@ class CrisisControllerTest {
 
         when(crisisService.getSafetyPlan(any(UUID.class))).thenReturn(plan);
 
-        mockMvc.perform(get("/crisis/safety-plan")
-                        .param("userId", TEST_USER_ID.toString()))
+        mockMvc.perform(get("/crisis/safety-plan"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.userId").value(TEST_USER_ID.toString()))
                 .andExpect(jsonPath("$.warningSignals[0]").value("Feeling overwhelmed or hopeless"))
@@ -246,7 +257,6 @@ class CrisisControllerTest {
                 .thenReturn(updatedPlan);
 
         mockMvc.perform(put("/crisis/safety-plan")
-                        .param("userId", TEST_USER_ID.toString())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updateRequest)))
                 .andExpect(status().isOk())

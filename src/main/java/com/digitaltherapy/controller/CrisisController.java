@@ -1,6 +1,7 @@
 package com.digitaltherapy.controller;
 
 import com.digitaltherapy.dto.*;
+import com.digitaltherapy.entity.User;
 import com.digitaltherapy.service.CrisisService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -8,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +26,8 @@ public class CrisisController {
 
     @GetMapping
     @Operation(summary = "Get crisis support hub")
-    public ResponseEntity<CrisisHub> getCrisisHub(
-            @RequestParam(required = false) UUID userId) {
+    public ResponseEntity<CrisisHub> getCrisisHub(@AuthenticationPrincipal User user) {
+        UUID userId = user != null ? user.getId() : null;
         log.info("Fetching crisis hub, userId: {}", userId);
         return ResponseEntity.ok(crisisService.getCrisisHub(userId));
     }
@@ -47,17 +49,17 @@ public class CrisisController {
 
     @GetMapping("/safety-plan")
     @Operation(summary = "Get user safety plan")
-    public ResponseEntity<SafetyPlanDto> getSafetyPlan(@RequestParam UUID userId) {
-        log.info("Fetching safety plan for user: {}", userId);
-        return ResponseEntity.ok(crisisService.getSafetyPlan(userId));
+    public ResponseEntity<SafetyPlanDto> getSafetyPlan(@AuthenticationPrincipal User user) {
+        log.info("Fetching safety plan for authenticated user: {}", user.getId());
+        return ResponseEntity.ok(crisisService.getSafetyPlan(user.getId()));
     }
 
     @PutMapping("/safety-plan")
     @Operation(summary = "Update user safety plan")
     public ResponseEntity<SafetyPlanDto> updateSafetyPlan(
-            @RequestParam UUID userId,
+            @AuthenticationPrincipal User user,
             @Valid @RequestBody SafetyPlanUpdate request) {
-        log.info("Updating safety plan for user: {}", userId);
-        return ResponseEntity.ok(crisisService.updateSafetyPlan(userId, request));
+        log.info("Updating safety plan for authenticated user: {}", user.getId());
+        return ResponseEntity.ok(crisisService.updateSafetyPlan(user.getId(), request));
     }
 }

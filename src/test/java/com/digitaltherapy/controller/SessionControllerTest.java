@@ -166,7 +166,7 @@ class SessionControllerTest {
                 .crisisAction(null)
                 .build();
 
-        when(sessionService.chat(any(UUID.class), any(String.class))).thenReturn(response);
+        when(sessionService.chat(any(UUID.class), any(UUID.class), any(String.class))).thenReturn(response);
 
         mockMvc.perform(post("/sessions/{sessionId}/chat", TEST_SESSION_ID)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -205,7 +205,7 @@ class SessionControllerTest {
                 .keyInsights(List.of("Identified catastrophizing pattern"))
                 .build();
 
-        when(sessionService.endSession(any(UUID.class), any())).thenReturn(summary);
+        when(sessionService.endSession(any(UUID.class), any(UUID.class), any())).thenReturn(summary);
 
         Map<String, Object> body = Map.of("reason", "completed");
 

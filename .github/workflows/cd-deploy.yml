@@ -2,7 +2,7 @@ name: CD Deploy to EC2
 
 on:
   workflow_run:
-    workflows: [ "CD Build and Push" ]
+    workflows: [ "CD Build Validation" ]
     types: [ completed ]
 
 jobs:
@@ -18,5 +18,11 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/${{ secrets.EC2_USER }}/mindbridge
-            docker compose pull
-            docker compose up -d --build
+            git fetch origin
+            if git show-ref --verify --quiet refs/heads/${{ github.event.workflow_run.head_branch }}; then
+              git checkout ${{ github.event.workflow_run.head_branch }}
+            else
+              git checkout -b ${{ github.event.workflow_run.head_branch }} origin/${{ github.event.workflow_run.head_branch }}
+            fi
+            git pull origin ${{ github.event.workflow_run.head_branch }}
+            docker compose up -d --build --remove-orphans

@@ -197,7 +197,7 @@ class DiaryControllerTest {
                 .createdAt(LocalDateTime.of(2026, 2, 27, 18, 0, 0))
                 .build();
 
-        when(diaryService.getEntryDetail(any(UUID.class))).thenReturn(detail);
+        when(diaryService.getEntryDetail(any(UUID.class), any(UUID.class))).thenReturn(detail);
 
         mockMvc.perform(get("/diary/entries/{entryId}", TEST_ENTRY_ID))
                 .andExpect(status().isOk())
@@ -216,7 +216,7 @@ class DiaryControllerTest {
     // ----------------------------------------------------------- deleteEntry
     @Test
     void deleteEntry_Returns204() throws Exception {
-        doNothing().when(diaryService).deleteEntry(any(UUID.class));
+        doNothing().when(diaryService).deleteEntry(any(UUID.class), any(UUID.class));
 
         mockMvc.perform(delete("/diary/entries/{entryId}", TEST_ENTRY_ID))
                 .andExpect(status().isNoContent());

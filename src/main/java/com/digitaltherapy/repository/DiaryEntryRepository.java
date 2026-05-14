@@ -9,12 +9,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface DiaryEntryRepository extends JpaRepository<DiaryEntry, UUID> {
 
     Page<DiaryEntry> findByUserIdAndDeletedFalseOrderByCreatedAtDesc(UUID userId, Pageable pageable);
+
+    Optional<DiaryEntry> findByIdAndUserIdAndDeletedFalse(UUID entryId, UUID userId);
 
     @Query("SELECT d.id, d.name, COUNT(de) FROM DiaryEntry de JOIN de.distortions d WHERE de.user.id = :userId AND de.deleted = false GROUP BY d.id, d.name ORDER BY COUNT(de) DESC")
     List<Object[]> findTopDistortionsByUserId(@Param("userId") UUID userId);

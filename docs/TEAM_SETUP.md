@@ -19,7 +19,13 @@ For local development, run them separately first. That gives clearer errors than
 From your local clone:
 
 ```bash
-git pull origin master
+git pull origin <active-branch>
+```
+
+If you are working from the current recovery branch, use:
+
+```bash
+git pull origin rescue-cloud-ready
 ```
 
 ## 2. Configure Java 21
@@ -118,7 +124,7 @@ There is a `docker-compose.yml` and `nginx.conf`, but local debugging should sta
 
 Current Docker/Nginx behavior:
 
-- Nginx listens on port `80`
+- Nginx listens on port `3000`
 - `/` proxies to the frontend container
 - `/api/` proxies to the backend container
 

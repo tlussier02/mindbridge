@@ -49,17 +49,21 @@ public class DiaryController {
 
     @GetMapping("/entries/{entryId}")
     @Operation(summary = "Get diary entry detail")
-    public ResponseEntity<DiaryEntryDetail> getEntryDetail(@PathVariable UUID entryId) {
-        log.info("Fetching diary entry detail: {}", entryId);
-        return ResponseEntity.ok(diaryService.getEntryDetail(entryId));
+    public ResponseEntity<DiaryEntryDetail> getEntryDetail(
+            @AuthenticationPrincipal User user,
+            @PathVariable UUID entryId) {
+        log.info("Fetching diary entry detail for user: {}, entry: {}", user.getId(), entryId);
+        return ResponseEntity.ok(diaryService.getEntryDetail(user.getId(), entryId));
     }
 
     @DeleteMapping("/entries/{entryId}")
     @Operation(summary = "Delete a diary entry")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> deleteEntry(@PathVariable UUID entryId) {
-        log.info("Deleting diary entry: {}", entryId);
-        diaryService.deleteEntry(entryId);
+    public ResponseEntity<Void> deleteEntry(
+            @AuthenticationPrincipal User user,
+            @PathVariable UUID entryId) {
+        log.info("Deleting diary entry for user: {}, entry: {}", user.getId(), entryId);
+        diaryService.deleteEntry(user.getId(), entryId);
         return ResponseEntity.noContent().build();
     }
 

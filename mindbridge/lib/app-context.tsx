@@ -39,6 +39,7 @@ export type Screen =
   | "progress-achievements"
 
 export type ViewMode = "mobile" | "web"
+export type SessionSelectionId = string | number
 
 interface AppState {
   screen: Screen
@@ -52,7 +53,7 @@ interface AppState {
   burnoutScore: number
   sessionsCompleted: number
   streakDays: number
-  selectedSessionId: number | null
+  selectedSessionId: SessionSelectionId | null
   selectedDiaryId: string | null
 }
 
@@ -78,7 +79,7 @@ interface AppContextType extends AppState {
   addDiaryEntry: (entry: DiaryEntry) => void
   setBurnoutScore: (score: number) => void
   incrementSessions: () => void
-  selectSession: (id: number) => void
+  selectSession: (id: SessionSelectionId) => void
   selectDiaryEntry: (id: string) => void
 }
 
@@ -166,7 +167,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }))
   }, [])
 
-  const selectSession = useCallback((id: number) => {
+  const selectSession = useCallback((id: SessionSelectionId) => {
     setState((prev) => ({ ...prev, selectedSessionId: id, screen: "session-detail" as Screen }))
   }, [])
 

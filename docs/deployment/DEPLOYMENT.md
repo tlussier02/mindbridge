@@ -66,10 +66,10 @@ If additional deployment variables are introduced later, document them here befo
 Run the deployment stack from the project root:
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
-If the final project switches to `docker compose` syntax, update this document accordingly.
+The current deployment branch uses `docker compose` syntax and a git-based deploy flow on EC2.
 
 ## Verification Checklist
 
@@ -97,7 +97,7 @@ Store any supporting notes or deployment logs under `docs/deployment/evidence/`.
 - check container logs with:
 
 ```bash
-docker-compose logs -f
+docker compose logs -f
 ```
 
 - confirm the EC2 security group exposes the required ports

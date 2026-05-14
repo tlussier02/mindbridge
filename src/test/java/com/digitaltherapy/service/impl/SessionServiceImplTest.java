@@ -210,12 +210,12 @@ class SessionServiceImplTest {
                 .crisisAction(null)
                 .build();
 
-        when(userSessionRepository.findById(TEST_USER_SESSION_ID)).thenReturn(Optional.of(testUserSession));
+        when(userSessionRepository.findByIdAndUserId(TEST_USER_SESSION_ID, TEST_USER_ID)).thenReturn(Optional.of(testUserSession));
         when(chatMessageRepository.save(any(ChatMessage.class))).thenAnswer(invocation -> invocation.getArgument(0));
         when(aiService.generateResponse(TEST_USER_SESSION_ID, userMessage)).thenReturn(aiResponse);
 
         // Act
-        ChatResponse result = sessionService.chat(TEST_USER_SESSION_ID, userMessage);
+        ChatResponse result = sessionService.chat(TEST_USER_ID, TEST_USER_SESSION_ID, userMessage);
 
         // Assert
         assertThat(result).isNotNull();
@@ -224,7 +224,7 @@ class SessionServiceImplTest {
         assertThat(result.isCrisisDetected()).isFalse();
         assertThat(result.getCrisisAction()).isNull();
 
-        verify(userSessionRepository).findById(TEST_USER_SESSION_ID);
+        verify(userSessionRepository).findByIdAndUserId(TEST_USER_SESSION_ID, TEST_USER_ID);
         // User message saved + Assistant message saved = 2 saves
         verify(chatMessageRepository, times(2)).save(any(ChatMessage.class));
         verify(aiService).generateResponse(TEST_USER_SESSION_ID, userMessage);
@@ -236,13 +236,13 @@ class SessionServiceImplTest {
         // Arrange
         String userMessage = "I need help";
 
-        when(userSessionRepository.findById(TEST_USER_SESSION_ID)).thenReturn(Optional.of(testUserSession));
+        when(userSessionRepository.findByIdAndUserId(TEST_USER_SESSION_ID, TEST_USER_ID)).thenReturn(Optional.of(testUserSession));
         when(chatMessageRepository.save(any(ChatMessage.class))).thenAnswer(invocation -> invocation.getArgument(0));
         when(aiService.generateResponse(TEST_USER_SESSION_ID, userMessage))
                 .thenThrow(new RuntimeException("AI service unavailable"));
 
         // Act
-        ChatResponse result = sessionService.chat(TEST_USER_SESSION_ID, userMessage);
+        ChatResponse result = sessionService.chat(TEST_USER_ID, TEST_USER_SESSION_ID, userMessage);
 
         // Assert
         assertThat(result).isNotNull();
@@ -264,11 +264,11 @@ class SessionServiceImplTest {
         testUserSession.setMoodBefore(3);
         testUserSession.setMoodAfter(7);
 
-        when(userSessionRepository.findById(TEST_USER_SESSION_ID)).thenReturn(Optional.of(testUserSession));
+        when(userSessionRepository.findByIdAndUserId(TEST_USER_SESSION_ID, TEST_USER_ID)).thenReturn(Optional.of(testUserSession));
         when(userSessionRepository.save(any(UserSession.class))).thenReturn(testUserSession);
 
         // Act
-        SessionSummary result = sessionService.endSession(TEST_USER_SESSION_ID, "completed");
+        SessionSummary result = sessionService.endSession(TEST_USER_ID, TEST_USER_SESSION_ID, "completed");
 
         // Assert
         assertThat(result).isNotNull();
@@ -282,7 +282,7 @@ class SessionServiceImplTest {
         assertThat(result.getSummary()).isEqualTo("Session completed.");
         assertThat(result.getKeyInsights()).isEmpty();
 
-        verify(userSessionRepository).findById(TEST_USER_SESSION_ID);
+        verify(userSessionRepository).findByIdAndUserId(TEST_USER_SESSION_ID, TEST_USER_ID);
         verify(userSessionRepository).save(any(UserSession.class));
     }
 

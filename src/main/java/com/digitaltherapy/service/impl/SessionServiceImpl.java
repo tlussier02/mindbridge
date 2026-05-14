@@ -99,10 +99,10 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     @Transactional
-    public ChatResponse chat(UUID sessionId, String message) {
-        log.info("Processing chat message for user session: {}", sessionId);
+    public ChatResponse chat(UUID userId, UUID sessionId, String message) {
+        log.info("Processing chat message for user: {}, user session: {}", userId, sessionId);
 
-        UserSession userSession = userSessionRepository.findById(sessionId)
+        UserSession userSession = userSessionRepository.findByIdAndUserId(sessionId, userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User session not found with id: " + sessionId));
 
         // Save the user message
@@ -157,10 +157,10 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     @Transactional
-    public SessionSummary endSession(UUID sessionId, String reason) {
-        log.info("Ending user session: {} with reason: {}", sessionId, reason);
+    public SessionSummary endSession(UUID userId, UUID sessionId, String reason) {
+        log.info("Ending user session: {} for user: {} with reason: {}", sessionId, userId, reason);
 
-        UserSession userSession = userSessionRepository.findById(sessionId)
+        UserSession userSession = userSessionRepository.findByIdAndUserId(sessionId, userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User session not found with id: " + sessionId));
 
         SessionStatus status = "early_exit".equalsIgnoreCase(reason)

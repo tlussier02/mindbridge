@@ -66,5 +66,5 @@ For full teammate build/run steps, see:
 - Docker and Docker Compose configuration
 - deployment documentation
 - updated architecture diagrams
-- CI/CD/CD workflow files
+- CI/CD workflow files
 - submission evidence and screenshots

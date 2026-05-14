@@ -24,4 +24,6 @@ public interface UserSessionRepository extends JpaRepository<UserSession, UUID> 
     Long countCompletedByUserId(@Param("userId") UUID userId);
 
     Optional<UserSession> findFirstByUserIdAndStatusOrderByStartedAtDesc(UUID userId, SessionStatus status);
+
+    Optional<UserSession> findByIdAndUserId(UUID sessionId, UUID userId);
 }

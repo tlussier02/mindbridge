@@ -31,9 +31,6 @@ public class CrisisServiceImpl implements CrisisService {
     public CrisisHub getCrisisHub(UUID userId) {
         log.info("Fetching crisis hub for user: {}", userId);
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
-
         List<CrisisHub.EmergencyResource> emergencyResources = List.of(
                 CrisisHub.EmergencyResource.builder()
                         .name("988 Suicide & Crisis Lifeline")
@@ -75,14 +72,20 @@ public class CrisisServiceImpl implements CrisisService {
                 "Write down your thoughts in your thought diary."
         );
 
-        // Build safety plan summary from trusted contacts
-        List<TrustedContact> contacts = trustedContactRepository.findByUserId(userId);
         String safetyPlanSummary;
-        if (contacts.isEmpty()) {
-            safetyPlanSummary = "Your safety plan has not been set up yet. Consider adding trusted contacts and coping strategies.";
+        if (userId == null) {
+            safetyPlanSummary = "Sign in to access your personal safety plan and trusted contacts.";
         } else {
-            safetyPlanSummary = "You have " + contacts.size() + " trusted contact(s) in your safety plan. "
-                    + "Review your full safety plan for complete details.";
+            userRepository.findById(userId)
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
+
+            List<TrustedContact> contacts = trustedContactRepository.findByUserId(userId);
+            if (contacts.isEmpty()) {
+                safetyPlanSummary = "Your safety plan has not been set up yet. Consider adding trusted contacts and coping strategies.";
+            } else {
+                safetyPlanSummary = "You have " + contacts.size() + " trusted contact(s) in your safety plan. "
+                        + "Review your full safety plan for complete details.";
+            }
         }
 
         return CrisisHub.builder()

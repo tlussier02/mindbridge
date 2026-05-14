@@ -10,8 +10,8 @@ import java.util.UUID;
 public interface DiaryService {
     DiaryEntryResponse createEntry(UUID userId, DiaryEntryCreate request);
     Page<DiaryEntrySummary> getEntries(UUID userId, Pageable pageable);
-    DiaryEntryDetail getEntryDetail(UUID entryId);
-    void deleteEntry(UUID entryId);
+    DiaryEntryDetail getEntryDetail(UUID userId, UUID entryId);
+    void deleteEntry(UUID userId, UUID entryId);
     List<DistortionSuggestion> suggestDistortions(String thought);
     DiaryInsights getInsights(UUID userId);
 }
