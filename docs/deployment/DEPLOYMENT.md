@@ -21,9 +21,9 @@ The intended deployment model is:
 The final deployed system should provide:
 
 - frontend on port `3000`
-- Swagger UI on port `8080`
-- H2 console on port `8080`
-- actuator health endpoint on port `8080`
+- Swagger UI proxied through port `3000`
+- H2 console proxied through port `3000`
+- actuator health endpoint proxied through port `3000`
 - MCP endpoint exposure as required by the Assignment 3 deliverables
 
 ## Prerequisites
@@ -33,6 +33,15 @@ The final deployed system should provide:
 - Docker Compose available
 - Git installed
 - required environment variables prepared
+- GitHub repository secrets configured for deployment
+
+## Required GitHub Secrets
+
+The deploy workflow expects these repository secrets:
+
+- `EC2_HOST`: the EC2 public DNS or IP
+- `EC2_USER`: the SSH user, typically `ec2-user`
+- `EC2_SSH_KEY`: the full PEM private key contents for the EC2 instance
 
 ## Required Environment Variables
 
@@ -76,9 +85,9 @@ The current deployment branch uses `docker compose` syntax and a git-based deplo
 After deployment, verify:
 
 1. frontend loads in a browser
-2. Swagger UI loads
-3. H2 console loads
-4. actuator health returns `UP`
+2. Swagger UI loads through `:3000/swagger-ui`
+3. H2 console loads through `:3000/h2-console/`
+4. actuator health returns `UP` through `:3000/actuator/health`
 5. MCP endpoint is reachable if exposed over HTTP in the final submission
 
 ## Evidence To Capture

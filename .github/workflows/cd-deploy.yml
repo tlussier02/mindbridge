@@ -10,6 +10,16 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Validate deploy secrets
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        run: |
+          test -n "$EC2_HOST" || { echo "EC2_HOST secret is missing"; exit 1; }
+          test -n "$EC2_USER" || { echo "EC2_USER secret is missing"; exit 1; }
+          test -n "$EC2_SSH_KEY" || { echo "EC2_SSH_KEY secret is missing"; exit 1; }
+
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -17,7 +27,18 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/${{ secrets.EC2_USER }}/mindbridge
+            set -e
+            APP_DIR="/home/${{ secrets.EC2_USER }}/mindbridge"
+            REPO_URL="https://github.com/${{ github.repository }}.git"
+
+            mkdir -p "/home/${{ secrets.EC2_USER }}"
+
+            if [ ! -d "$APP_DIR/.git" ]; then
+              rm -rf "$APP_DIR"
+              git clone --branch "${{ github.event.workflow_run.head_branch }}" "$REPO_URL" "$APP_DIR"
+            fi
+
+            cd "$APP_DIR"
             git fetch origin
             if git show-ref --verify --quiet refs/heads/${{ github.event.workflow_run.head_branch }}; then
               git checkout ${{ github.event.workflow_run.head_branch }}
@@ -25,4 +46,4 @@ jobs:
               git checkout -b ${{ github.event.workflow_run.head_branch }} origin/${{ github.event.workflow_run.head_branch }}
             fi
             git pull origin ${{ github.event.workflow_run.head_branch }}
-            docker compose up -d --build --remove-orphans
+            sudo docker compose up -d --build --remove-orphans
